@@ -1,0 +1,11 @@
+{
+    "PARSE_CONFIG": {
+        "APP_NAME": "CHATTO",
+        "APP_ID": "3YuaXvph8FrIsuLUGGl56bZt9SpvZPluz5giSeqH",
+        "MASTER_KEY": "u0x2066pSdwG6eQxDtRVRYOjEFct4WzMCUVLZfob",
+        "PARSE_SERVER_JAVASCRIPT_KEY": "PhQpb5IjjeuqUGUTNKK5hoPLhVadxuLFp65gJiAs",
+        "PARSE_SERVER_REST_API_KEY": "V1OEBqhkUmc6NzFNxf3qLDNHv8FLHxQYmzRDuVyQ",
+        "PARSE_SERVER_CLIENT_KEY": "4tuHT8UfQFIFO3rU3FAsy4AfrfctgnObkEbVJboF",
+        "SERVER_URL": "https://ec1810.glitch.me/api"
+    }
+}
