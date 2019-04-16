@@ -10,7 +10,7 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" component={Chat} />
+                    <Route exact path="/:id" component={Chat} />
                     <Route path="/signup" component={SignUp} />
                     <Route path="/login" component={LogIn} />
                 </Switch>

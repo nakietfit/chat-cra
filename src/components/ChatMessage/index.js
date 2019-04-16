@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import ParseSDK from '../../helpers/parseSDK'
+import { withRouter } from 'react-router'
 
-export default class ChatMessage extends Component {
+class ChatMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +16,7 @@ export default class ChatMessage extends Component {
 
     msg.set("message", this.messageToSend.current.value);
     msg.set("senderId", currentUser.id);
-    msg.set("receiverId", "rrQZdINvYD");
+    msg.set("receiverId", this.props.match.params.id);
 
     await msg.save();
     this.messageToSend.current.value = "";
@@ -34,3 +35,5 @@ export default class ChatMessage extends Component {
     )
   }
 }
+
+export default withRouter(ChatMessage)
