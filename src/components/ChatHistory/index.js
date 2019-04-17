@@ -8,6 +8,8 @@ class ChatHistory extends Component {
     message_list: []
   }
 
+  subscription = null
+
   getMessageList = async () => {
     const currentUser = ParseSDK.User.current();
     const sndMsg = new ParseSDK.Query('Message');
@@ -20,10 +22,31 @@ class ChatHistory extends Component {
     const res = await msg.find();
     const msgList = res.map(e => e.toJSON());
     this.setState({ message_list: msgList });
+
+    this.subscription = await msg.subscribe();
+    this.subscription.on('open', () => {
+      console.log('subscription opened');
+    });
+    this.subscription.on('create', (msg) => {
+      let message = {
+        message: msg.attributes.message,
+        senderId: msg.attributes.senderId,
+        receiverId: msg.attributes.receiverId,
+        createdAt: msg.attributes.createdAt.toString()
+      }
+      this.setState({ message_list: this.state.message_list.concat(message) })
+    });
   }
 
   componentDidMount() {
     this.getMessageList();
+  }
+
+  componentWillUnmount() {
+    this.subscription.on('close', () => {
+      console.log('subscription closed');
+    });
+    this.subscription.unsubscribe();
   }
 
   render() {
