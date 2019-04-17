@@ -10,13 +10,13 @@ class ChatHistory extends Component {
 
   subscription = null
 
-  getMessageList = async () => {
+  getMessageList = async (id) => {
     const currentUser = ParseSDK.User.current();
     const sndMsg = new ParseSDK.Query('Message');
     sndMsg.equalTo('senderId', currentUser.id);
-    sndMsg.equalTo('receiverId', this.props.match.params.id);
+    sndMsg.equalTo('receiverId', id);
     const rcvMsg = new ParseSDK.Query('Message');
-    rcvMsg.equalTo('senderId', this.props.match.params.id);
+    rcvMsg.equalTo('senderId', id);
     rcvMsg.equalTo('receiverId', currentUser.id);
     const msg = ParseSDK.Query.or(sndMsg, rcvMsg);
     const res = await msg.find();
@@ -38,8 +38,15 @@ class ChatHistory extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.setState({ message_list: [] });
+      this.getMessageList(nextProps.match.params.id);
+    }
+  }
+
   componentDidMount() {
-    this.getMessageList();
+    this.getMessageList(this.props.match.params.id);
   }
 
   componentWillUnmount() {
