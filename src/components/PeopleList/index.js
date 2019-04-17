@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import People from '../People'
 import Search from '../Search'
+import ParseSDK from '../../helpers/parseSDK'
 
 export default class PeopleList extends Component {
-  people_list = [
-    {
-      avatar: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg",
-      name: "Vincent Porter",
-      status: "online"
-    },
-    {
-      avatar: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg",
-      name: "Aiden Chavez",
-      status: "left 7 mins ago"
-    },
-    {
-      avatar: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg",
-      name: "Mike Thomas",
-      status: "online"
-    }
-  ]
+  state = {
+    people_list: []
+  }
+
+  getPeopleList = async () => {
+    const pplQuery = new ParseSDK.Query(ParseSDK.User);
+    pplQuery.notEqualTo("objectId", ParseSDK.User.current().id);
+
+    const ppl = await pplQuery.find();
+    const pplList = ppl.map(e => e.toJSON());
+    this.setState({ people_list: pplList });
+  }
+
+  componentDidMount() {
+    this.getPeopleList();
+  }
 
   render() {
     return (
@@ -27,7 +27,7 @@ export default class PeopleList extends Component {
         <Search />
         <ul class="list">
           {
-            this.people_list.map((e, i) => <People key={i} people={e} />)
+            this.state.people_list.map((e, i) => <People key={i} people={e} />)
           }
         </ul>
       </div>
