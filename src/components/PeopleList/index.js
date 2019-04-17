@@ -21,9 +21,14 @@ export default class PeopleList extends Component {
     this.getPeopleList();
   }
 
+  logOut = () => {
+    ParseSDK.User.logOut();
+  }
+
   render() {
     return (
       <div className="people-list" id="people-list">
+        <button onClick={this.logOut}>Log out</button>
         <Search />
         <ul className="list">
           {

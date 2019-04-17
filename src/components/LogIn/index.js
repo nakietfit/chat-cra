@@ -6,6 +6,10 @@ export default class LogIn extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      reload: false
+    }
+
     this.email = React.createRef();
     this.password = React.createRef();
   }
@@ -13,11 +17,12 @@ export default class LogIn extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     await ParseSDK.User.logIn(this.email.current.value, this.password.current.value);
+    this.setState({ reload: !this.state.reload });
   };
 
   render() {
     if (ParseSDK.User.current()) {
-      return <Redirect to="/message" />;
+      return <Redirect to="/" />;
     }
 
     return (

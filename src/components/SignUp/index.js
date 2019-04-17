@@ -6,6 +6,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      reload: false
+    }
+
     this.email = React.createRef();
     this.password = React.createRef();
     this.name = React.createRef();
@@ -20,6 +24,7 @@ export default class SignUp extends Component {
 
     try {
       await user.signUp();
+      this.setState({ reload: !this.state.reload });
     } catch (error) {
       console.log("Error: " + error.code + " " + error.message);
     }
@@ -27,7 +32,7 @@ export default class SignUp extends Component {
 
   render() {
     if (ParseSDK.User.current()) {
-      return <Redirect to="/message" />;
+      return <Redirect to="/" />;
     }
 
     return (
