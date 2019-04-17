@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import ParseSDK from '../../helpers/parseSDK'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 export default class LogIn extends Component {
   constructor(props) {
@@ -16,6 +16,10 @@ export default class LogIn extends Component {
   };
 
   render() {
+    if (ParseSDK.User.current()) {
+      return <Redirect to="/message" />;
+    }
+
     return (
       <Fragment>
         <Link to="/signup">Sign up</Link>
