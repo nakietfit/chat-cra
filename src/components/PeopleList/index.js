@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import People from '../People'
 import Search from '../Search'
 import ParseSDK from '../../helpers/parseSDK'
+import { Redirect } from 'react-router-dom'
 
 export default class PeopleList extends Component {
   state = {
-    people_list: []
+    people_list: [],
+    reload: false
   }
 
   getPeopleList = async () => {
@@ -22,10 +24,16 @@ export default class PeopleList extends Component {
   }
 
   logOut = () => {
-    ParseSDK.User.logOut();
+    ParseSDK.User.logOut().then(() => {
+      this.setState({ reload: !this.state.reload });
+    });
   }
 
   render() {
+    if (!ParseSDK.User.current()) {
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div className="people-list" id="people-list">
         <button onClick={this.logOut}>Log out</button>
