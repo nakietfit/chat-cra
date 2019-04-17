@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import ParseSDK from '../../helpers/parseSDK'
+import { Link } from 'react-router-dom'
 
 export default class LogIn extends Component {
   constructor(props) {
@@ -16,11 +17,14 @@ export default class LogIn extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="email" ref={this.email} placeholder="Email" />
-        <input type="password" ref={this.password} placeholder="Password" />
-        <button>Log in</button>
-      </form>
+      <Fragment>
+        <Link to="/signup">Sign up</Link>
+        <form onSubmit={this.handleSubmit}>
+          <input type="email" ref={this.email} placeholder="Email" />
+          <input type="password" ref={this.password} placeholder="Password" />
+          <button>Log in</button>
+        </form>
+      </Fragment>
     )
   }
 }
