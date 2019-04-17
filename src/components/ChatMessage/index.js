@@ -24,11 +24,11 @@ class ChatMessage extends Component {
 
   render() {
     return (
-      <div class="chat-message clearfix">
+      <div className="chat-message clearfix">
         <textarea name="message-to-send" ref={this.messageToSend} placeholder ="Type your message" rows="3"></textarea>
                 
-        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-        <i class="fa fa-file-image-o"></i>
+        <i className="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i className="fa fa-file-image-o"></i>
         
         <button onClick={this.handleClick}>Send</button>
       </div>

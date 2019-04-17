@@ -23,9 +23,9 @@ export default class PeopleList extends Component {
 
   render() {
     return (
-      <div class="people-list" id="people-list">
+      <div className="people-list" id="people-list">
         <Search />
-        <ul class="list">
+        <ul className="list">
           {
             this.state.people_list.map((e, i) => <People key={i} people={e} />)
           }

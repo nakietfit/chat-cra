@@ -14,11 +14,11 @@ class Chat extends Component {
     }
     
     return (
-      <div class="container clearfix">
+      <div className="container clearfix">
         <PeopleList />
         {
           this.props.match.params.id && (
-            <div class="chat">
+            <div className="chat">
               <ChatHeader />
               <ChatHistory />
               <ChatMessage />

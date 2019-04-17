@@ -12,7 +12,7 @@ export default class LogIn extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const user = await ParseSDK.User.logIn(this.email.current.value, this.password.current.value);
+    await ParseSDK.User.logIn(this.email.current.value, this.password.current.value);
   };
 
   render() {
