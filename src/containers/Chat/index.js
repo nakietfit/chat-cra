@@ -8,18 +8,20 @@ import { Redirect } from 'react-router-dom'
 
 export default class Chat extends Component {
   render() {
-    if (!ParseSDK.User.current()) {
-      return <Redirect to="/login" />
-    }
-
     return (
       <div class="container clearfix">
         <PeopleList />
-        <div class="chat">
-          <ChatHeader />
-          <ChatHistory />
-          <ChatMessage />
-        </div>
+        {
+          ParseSDK.User.current() ? (
+            <div class="chat">
+              <ChatHeader />
+              <ChatHistory />
+              <ChatMessage />
+            </div>
+          ) : (
+            <Redirect to="/login" />
+          )
+        }
       </div>
     )
   }
